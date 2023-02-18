@@ -1,0 +1,38 @@
+header{
+    width: auto;
+    height: 100px;
+
+}
+main{
+    width: auto;
+    height: 550px;
+
+}
+footer{
+    width: auto;
+    height: 100px;
+
+}
+.conteneur .nav{
+    /*background-color: skyblue;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+.element{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 12.5px rgb(4, 4, 4);
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+    /*background-color: skyblue;*/
+}
+.element:hover{
+    opacity: 85%;
+}
+
+ul {
+    list-style-type: none;
+}
+
