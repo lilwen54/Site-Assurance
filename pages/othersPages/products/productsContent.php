@@ -36,7 +36,7 @@ $produits = array(
                                     <h2 class="card-title"><?php echo $produit['titre']; ?></h2>
                                     <p class="card-text"><?php echo $produit['description']; ?></p>
                                     <p class="card-footer">A partir de <?php echo $produit['prix']; ?></p>
-                                    <a href="#" class="btn btn-primary">Souscrire</a>
+                                    <a href="quote.php" class="btn btn-primary">Souscrire</a>
                                 </div>
                             </div>
                         </div>

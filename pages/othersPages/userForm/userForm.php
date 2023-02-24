@@ -1,6 +1,9 @@
 <div class="container-fluid d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col-sm text-center">
+                <div class="card-header text-center">
+                    <h4>Informations personnelles</h4>
+                </div>
             <form action="process_form.php" method="post">   
                     <div class="form-group">
                 <label for="birthday">Date de naissance</label>

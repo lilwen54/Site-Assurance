@@ -1,7 +1,7 @@
 <main class="container my-5">
 		<section>
 			<h1 class="mb-4">Demande de devis d'assurance</h1>
-			<form method="post" action="process.php">
+			<form method="post" action="quoteWrite.php">
 				<div class="form-group row">
 					<label for="nom" class="col-sm-2 col-form-label">Nom :</label>
 					<div class="col-sm-10">

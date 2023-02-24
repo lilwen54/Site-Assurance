@@ -3,7 +3,7 @@
     <section class="jumbotron text-center">
       <h1>Bienvenue chez Diddy Assurance</h1>
       <p class="lead">Nous sommes une entreprise spécialisée dans la fourniture de produits d'assurance de haute qualité.</p>
-      <a href="#" class="btn btn-primary">Découvrez nos produits</a>
+      <a href="products.php" class="btn btn-primary">Découvrez nos produits</a>
     </section>
 
     <main class="my-5">

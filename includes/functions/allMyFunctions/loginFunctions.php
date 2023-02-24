@@ -1,6 +1,6 @@
 <?php 
 
-    function loginForm(){
+    function loginForm($pdo){
         ?>
         <form action="login.php" method="post" class="form-group">
         <div class="form-group">
@@ -19,17 +19,17 @@
         if(isset($_POST['submit'])){
             $email = $_POST['email'];
             $password = $_POST['password'];
-            login($email, $password);
+            login($email, $password,$pdo);
         }
     }
     function logout(){
         session_destroy();
         $_SESSION['logged_in'] = false;
     }
-    function login($email,$password){
+    function login($email,$password,$pdo){
         form_send_login();
         $email_exists = check_email_exists_login($email);
-        finalizingConnexion($email_exists,$email,$password);
+        finalizingConnexion($email_exists,$email,$password,$pdo);
     }
     
 
@@ -100,24 +100,44 @@
             return false;
         }
     }
-    function loginSuccessful ($password_matches){
-        if($password_matches){
-            //login user
+
+    function getUserTypeByEmail($email,$pdo) {
+        
+        $stmt = $pdo->prepare('SELECT user_type FROM user WHERE email = :email');
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user_type = $result['user_type'];
+        return $user_type;
+    }
+    
+    function loginSuccessful($password_matches, $user_type) {
+        if ($password_matches && $user_type == 'admin') {
+            // L'utilisateur est un administrateur et les identifiants sont corrects
             $_SESSION['logged_in'] = true;
-            echo "Connexion réussie"; 
-            
+            $_SESSION['user_type'] = 'admin'; // Ajout du champ user_type
+            echo "Connexion réussie en tant qu'administrateur";
+        } else if ($password_matches && $user_type == '' || $user_type == 'regular') {
+            // L'utilisateur est un utilisateur régulier et les identifiants sont corrects
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user_type'] = 'regular'; // Ajout du champ user_type
+            echo "Connexion réussie en tant qu'utilisateur régulier";
         } else {
+            // Les identifiants sont incorrects ou l'utilisateur n'a pas les autorisations nécessaires
             $_SESSION['logged_in'] = false;
-            echo "Mot de passe incorrect";
+            echo "Identifiants incorrects ou vous n'avez pas les autorisations nécessaires";
         }
     }
-    function finalizingConnexion ($email_exists,$email,$password){
-        if(!$email_exists){
+
+    function finalizingConnexion($email_exists, $email, $password, $pdo) {
+        if(!$email_exists) {
             echo 'Utilisateur non enregistré ou mot de passe incorrect';
         } else {
-            // check if password matches        
+            // check if password matches
             $password_matches = check_password_match($email, $password);
-            loginSuccessful($password_matches);
+            $user_type = getUserTypeByEmail($email, $pdo);
+            loginSuccessful($password_matches, $user_type);
         }
-    }   
+    }
+    
 ?>

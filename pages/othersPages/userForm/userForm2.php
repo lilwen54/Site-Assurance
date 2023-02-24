@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4>Mon profil</h4>
+                    <h4>Coordonnées</h4>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
